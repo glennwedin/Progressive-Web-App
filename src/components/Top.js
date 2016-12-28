@@ -1,0 +1,49 @@
+import React from 'react';
+
+export default class Top extends React.Component {
+	constructor () {
+		super();
+		this.state = {
+			isOnline: true
+		}
+	}
+
+	componentDidMount() {
+		this.checkConnection();
+	}
+
+	checkConnection() {
+		let isOnline = true,
+		goodConnection = true;
+
+		if(navigator.connectionn || navigator.mozConnection || navigator.webkitConnection) {
+			let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection,
+				type = connection.type;
+			setInterval(() => {
+				console.log("Connection type is change from " + type + " to " + connection.type);
+			}, 3000);
+		}
+		if(navigator.onLine) {
+			setInterval(() => {
+				this.setState({
+					isOnline: navigator.onLine
+				})
+			}, 3000)
+		}
+	}
+
+	render() {
+		return (
+			<div className="topbar">
+				<div className="row">
+					<div className="columns small-2" onClick={this.props.toggle}>
+						|||
+					</div>
+					<div className="columns small-9">
+						<span>Progressive web app</span> - {this.state.isOnline ? "" : "!"}
+					</div>
+				</div>
+			</div>
+		)
+	}
+}

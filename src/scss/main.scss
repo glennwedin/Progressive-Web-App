@@ -1,0 +1,35 @@
+@import 'foundation-sites/scss/foundation';
+@import 'settings';
+
+@include foundation-global-styles;
+@include foundation-grid;
+@include foundation-button;
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+* {
+	box-sizing: border-box;
+}
+body{
+	margin: 0;
+	padding: 0;
+	font-family: 'Lato', sans-serif;
+	font-size: 100%;
+	background-color: #fff;
+}
+
+.textarea{
+	padding: 1em;
+	min-height: 20px;
+	height: auto;
+	border: none;
+	width: 100%;
+	border-bottom: 3px solid rgba(50,105,255,1);
+	-webkit-appearance: none;
+	appearance: none;
+	resize: none;
+	margin: 0 0 1em;
+}
+
+
+@import 'shell.scss';

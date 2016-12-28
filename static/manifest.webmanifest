@@ -1,0 +1,16 @@
+{
+  "name": "PWA",
+  "short_name": "PWA",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A progressive web app",
+  "icons": [{
+    "src": "https://www.wedinweb.no/img/logocircel.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }],
+  "related_applications": [{
+    "platform": "web"
+  }]
+}
