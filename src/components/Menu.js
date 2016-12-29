@@ -15,7 +15,7 @@ export default class Menu extends React.Component {
 						<li><Link to="/" onClick={this.props.toggle}>Home</Link></li>
 						<li><Link to="/offline" onClick={this.props.toggle}>Offline storage / Background-sync</Link></li>
 						<li><Link to="/pushmessages" onClick={this.props.toggle}>Push messages</Link></li>
-						<li><Link to="/" onClick={this.props.toggle}>Server sent events</Link></li>
+						<li><Link to="/serversentevents" onClick={this.props.toggle}>Server sent events</Link></li>
 					</ul>
 				</div>
 			</div>

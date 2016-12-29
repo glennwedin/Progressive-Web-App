@@ -37,10 +37,15 @@ export default class Top extends React.Component {
 			<div className="topbar">
 				<div className="row">
 					<div className="columns small-2" onClick={this.props.toggle}>
-						|||
+						<div className="centered">
+							|||
+						</div>
 					</div>
-					<div className="columns small-9">
-						<span>Progressive web app</span> - {this.state.isOnline ? "" : "!"}
+					<div className="columns small-8">
+						<div className="title">Progressive web app</div>
+					</div>
+					<div className="columns small-2">
+						{this.state.isOnline ? "" : "!"}
 					</div>
 				</div>
 			</div>

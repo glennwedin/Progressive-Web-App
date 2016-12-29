@@ -15,33 +15,32 @@ export default class Push extends React.Component {
 
 		if ('serviceWorker' in navigator && 'PushManager' in window) {
 		  console.log('Service Worker and Push is supported');
-		  navigator.serviceWorker.register('sw.js').then((swReg) => {
-		      console.log('Service Worker is registered', swReg);
-
+		  /*navigator.serviceWorker.register('sw.js').then((swReg) => {
+		      console.log('Service Worker is registered', swReg);*/
 		      navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
-		          this.subscreibUser();
+		          this.subscreibUser(serviceWorkerRegistration);
 		      });
-		    })
+		    /*})
 		    .catch(function(error) {
 		      console.error('Service Worker Error', error);
-		    });
+		    });*/
 		} else {
 		  console.warn('Push messaging is not supported');
 		}
 	}
 
-	subscreibUser() {
+	subscreibUser(sworker) {
 		let applicationServerPublicKey = 'BHVJ8n4KMCPy7YOTwNTwn-M3lSKOP_J1PgPQ5lau8ExQ_HwhpbwjYwxtne9vFaOGMzVj_ETeLu5uv8sCZGwFFFc';
-	    window.sworker.pushManager.getSubscription().then((subscription) => {
+	    sworker.pushManager.getSubscription().then((subscription) => {
 	        console.log('User is NOT subscribed. - Subscribing');
 	        //DO THE STUFFING
 	        const applicationServerKey = this.urlBase64ToUint8Array(applicationServerPublicKey);
-	        window.sworker.pushManager.subscribe({
+	        sworker.pushManager.subscribe({
 	            userVisibleOnly: true,
 	            applicationServerKey: applicationServerKey
 	        }).then((subscription) => {
 	            console.log('User is subscribed:', subscription);
-				this.persist(subscription);
+							this.persist(subscription);
 	        }).catch((err) => {
 	            console.log('Failed to subscribe the user: ', err);
 	        });

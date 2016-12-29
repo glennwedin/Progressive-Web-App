@@ -1436,10 +1436,22 @@ body {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
   font-size: 1em;
   font-weight: 300; }
+  .topbar .title {
+    font-size: 1.6em;
+    padding: 6px 0; }
+  .topbar .centered {
+    padding: 10px 0;
+    font-size: 1.3em; }
 
 h1, h2, h3 {
   font-weight: 300;
   line-height: 1.2; }
+
+h1 {
+  margin: 1em 0 0; }
+
+h2 {
+  margin: 1.6em 0 0; }
 
 .desc {
   color: #333;

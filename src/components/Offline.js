@@ -10,7 +10,7 @@ export default class Offline extends React.Component {
 	    db.version(1).stores({
 	        texts: "++id,content"
 	    });
-		
+
 		this.state = {
 			db: db,
 			text: ""
@@ -33,9 +33,12 @@ export default class Offline extends React.Component {
 	    }).then(() => {
 			text.innerHTML = '';
 			//register sync on service worker
-			window.sworker.sync.register('syncoffline').then((e) => {
-				console.log('registered sync', e);
-			});
+			window.navigator.serviceWorker.ready.then((sworker) => {
+				sworker.sync.register('syncoffline').then((e) => {
+					console.log('registered sync', e);
+				});
+			})
+
 		}).catch(function(e) {
 			console.log(e)
 	    });

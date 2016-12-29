@@ -1,7 +1,7 @@
 //OFFLINE
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('pwa').then(function(cache) {
+   caches.open('v1').then(function(cache) {
      return cache.addAll([
        '/',
        '/offline',
@@ -16,6 +16,17 @@ self.addEventListener('install', function(e) {
 
 self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
+  var cacheWhitelist = ['v1'];
+
+  event.waitUntil(
+    caches.keys().then(function(keyList) {
+      return Promise.all(keyList.map(function(key) {
+        if (cacheWhitelist.indexOf(key) === -1) {
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
 });
 
 self.addEventListener('fetch', event => {
@@ -86,7 +97,7 @@ function doSync() {
                 body: JSON.stringify(d)
             }).then((data) => {
                 data.json().then((d) => {
-                    console.log(d)
+                    console.log('response', d)
                 })
             }).catch((error) => {
                 console.log('Request failed', error);

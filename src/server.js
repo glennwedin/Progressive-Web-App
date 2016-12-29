@@ -6,13 +6,38 @@ import mainroute from "./routers/routes";
 import path from "path";
 import webpush from 'web-push';
 import bodyParser from 'body-parser';
+import EventEmitter from 'events';
 
 var app = express();
 var queue = [];
+var em = new EventEmitter;
 //Point to static files
 app.use(express.static('dist/'));
 app.use(express.static('static/'))
 app.use(bodyParser.json());
+
+app.post('/api/push', function(req, res) {
+	let sub = req.body.subscription;
+	queue.push(sub);
+	res.send('OK');
+});
+app.post('/api/offline', function(req, res) {
+	res.json(req.body);
+});
+app.get('/api/sse', function(req, res) {
+	em.on('sseevent', function (data) {
+		res.write('event: sse\n');
+	  res.write('data: ' + JSON.stringify({ msg : data }) + '\n\n');
+	});
+  res.set({
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
+      "Access-Control-Allow-Origin": "*"
+  });
+  res.write("retry: 10000\n\n");
+});
+
 
 app.get('*', function (req, res) {
 	let routes = mainroute();
@@ -29,14 +54,11 @@ app.get('*', function (req, res) {
 	})
 });
 
-app.post('/api/push', function(req, res) {
-	let sub = req.body.subscription;
-	queue.push(sub);
-	res.send('OK');
-});
-app.post('/api/offline', function(req, res) {
-	res.json(req.body);
-});
+function timedEventEmitter() {
+		setInterval(() => {
+				em.emit('sseevent', 'message with number: #'+ Math.round(Math.random(2000, 1000000)*100000))
+		}, 5000);
+}
 
 function pushService() {
 	setInterval(() => {
@@ -74,3 +96,4 @@ function pushService() {
 //Listen on port
 app.listen(3000);
 pushService();
+timedEventEmitter()
