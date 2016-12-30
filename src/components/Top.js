@@ -41,10 +41,10 @@ export default class Top extends React.Component {
 							|||
 						</div>
 					</div>
-					<div className="columns small-8">
+					<div className="columns small-9">
 						<div className="title">Progressive web app</div>
 					</div>
-					<div className="columns small-2">
+					<div className="columns small-1">
 						{this.state.isOnline ? "" : "!"}
 					</div>
 				</div>
