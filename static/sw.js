@@ -39,9 +39,6 @@ self.addEventListener('fetch', event => {
 
 ///PUSH
 self.addEventListener('push', function(event) {
-  console.log('[Service Worker] Push Received.');
-  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
-
   const title = 'Push fra PWA POC';
   const options = {
     body: event.data.text(), //Your push message - event.data.text() for instance
@@ -65,7 +62,6 @@ function getOfflineData() {
         request.onerror = function(event) {
           console.log('error:', event);
         };
-        console.log('1')
         request.onsuccess = function (e) {
             db = e.target.result;
             let result = [],
@@ -88,7 +84,6 @@ function doSync() {
     return new Promise((res, rej) => {
         let data = getOfflineData();
         data.then((d) => {
-            console.log('data: ', d);
             fetch('http://localhost:3000/api/offline', {
                 method: 'post',
                 headers: {
@@ -97,7 +92,13 @@ function doSync() {
                 body: JSON.stringify(d)
             }).then((data) => {
                 data.json().then((d) => {
-                    console.log('response', d)
+                    const title = 'Background sync is done';
+                    const options = {
+                      body: "The data you saved have been synced with the server", //Your push message - event.data.text() for instance
+                      icon: '', //image
+                      badge: '' ////image
+                    };
+                    self.registration.showNotification(title, options);
                 })
             }).catch((error) => {
                 console.log('Request failed', error);
@@ -108,7 +109,6 @@ function doSync() {
 
 //Background sync
 self.addEventListener('sync', function(event) {
-    console.log('hva?')
   if (event.tag == 'syncoffline') {
      event.waitUntil(doSync());
   }

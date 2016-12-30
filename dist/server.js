@@ -55183,7 +55183,7 @@
 					{ className: 'row' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'columns' },
+						{ className: 'columns small-12' },
 						_react2.default.createElement(
 							'h1',
 							null,
@@ -55231,7 +55231,7 @@
 /* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -55243,6 +55243,10 @@
 	var _react = __webpack_require__(84);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _Alert = __webpack_require__(402);
+
+	var _Alert2 = _interopRequireDefault(_Alert);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55261,15 +55265,21 @@
 			var _this = _possibleConstructorReturn(this, (Push.__proto__ || Object.getPrototypeOf(Push)).call(this));
 
 			_this.swRegistration = "test";
+			_this.timer = null;
 
 			_this.state = {
-				resp: ""
+				resp: null
 			};
 			return _this;
 		}
 
 		_createClass(Push, [{
-			key: "subscribe",
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				clearTimeout(this.timer);
+			}
+		}, {
+			key: 'subscribe',
 			value: function subscribe() {
 				var _this2 = this;
 
@@ -55278,21 +55288,15 @@
 
 				if ('serviceWorker' in navigator && 'PushManager' in window) {
 					console.log('Service Worker and Push is supported');
-					/*navigator.serviceWorker.register('sw.js').then((swReg) => {
-	        console.log('Service Worker is registered', swReg);*/
 					navigator.serviceWorker.ready.then(function (serviceWorkerRegistration) {
 						_this2.subscreibUser(serviceWorkerRegistration);
 					});
-					/*})
-	    .catch(function(error) {
-	      console.error('Service Worker Error', error);
-	    });*/
 				} else {
 					console.warn('Push messaging is not supported');
 				}
 			}
 		}, {
-			key: "subscreibUser",
+			key: 'subscreibUser',
 			value: function subscreibUser(sworker) {
 				var _this3 = this;
 
@@ -55313,7 +55317,7 @@
 				});
 			}
 		}, {
-			key: "persist",
+			key: 'persist',
 			value: function persist(sub) {
 				var _this4 = this;
 
@@ -55324,13 +55328,17 @@
 					if (xhr.readyState === 4 && xhr.status === 200) {
 						_this4.setState({
 							resp: "Thanks, you will receive a push message within 60 seconds"
+						}, function () {
+							_this4.timer = setTimeout(function () {
+								_this4.setState({ resp: null });
+							}, 3000);
 						});
 					}
 				};
 				xhr.send(JSON.stringify({ subscription: sub }));
 			}
 		}, {
-			key: "urlBase64ToUint8Array",
+			key: 'urlBase64ToUint8Array',
 			value: function urlBase64ToUint8Array(base64String) {
 				var padding = '='.repeat((4 - base64String.length % 4) % 4);
 				var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
@@ -55342,42 +55350,34 @@
 				return outputArray;
 			}
 		}, {
-			key: "render",
+			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					"div",
-					{ className: "row" },
+					'div',
+					{ className: 'row' },
 					_react2.default.createElement(
-						"div",
-						{ className: "columns small-12" },
+						'div',
+						{ className: 'columns small-12' },
 						_react2.default.createElement(
-							"h1",
+							'h1',
 							null,
-							"Push notifications"
+							'Push notifications'
 						),
 						_react2.default.createElement(
-							"div",
-							{ className: "desc" },
+							'div',
+							{ className: 'desc' },
 							_react2.default.createElement(
-								"p",
+								'p',
 								null,
-								"Register for a push message. You will receive the push message within a minute from registering and you will then be forgotten forever"
+								'Register for a push message. You will receive the push message within a minute from registering and you will then be forgotten forever'
 							)
 						),
 						_react2.default.createElement(
-							"button",
-							{ className: "button", onClick: this.subscribe.bind(this) },
-							"Get a push message"
+							'button',
+							{ className: 'button', onClick: this.subscribe.bind(this) },
+							'Get a push message'
 						),
-						this.state.resp ? _react2.default.createElement(
-							"div",
-							{ className: "alert" },
-							_react2.default.createElement(
-								"p",
-								null,
-								this.state.resp
-							)
-						) : ''
+						_react2.default.createElement(_Alert2.default, { msg: this.state.resp })
 					)
 				);
 			}
@@ -55409,6 +55409,10 @@
 
 	var _dexie2 = _interopRequireDefault(_dexie);
 
+	var _Alert = __webpack_require__(402);
+
+	var _Alert2 = _interopRequireDefault(_Alert);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55425,6 +55429,9 @@
 
 			var _this = _possibleConstructorReturn(this, (Offline.__proto__ || Object.getPrototypeOf(Offline)).call(this));
 
+			_this.timer = null;
+
+
 			var db = new _dexie2.default("text");
 			db.version(1).stores({
 				texts: "++id,content"
@@ -55432,14 +55439,17 @@
 
 			_this.state = {
 				db: db,
-				text: ""
+				text: "",
+				resp: null
 			};
 			return _this;
 		}
 
 		_createClass(Offline, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {}
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				clearTimeout(this.timer);
+			}
 		}, {
 			key: 'textchange',
 			value: function textchange(e) {
@@ -55450,6 +55460,8 @@
 		}, {
 			key: 'save',
 			value: function save(e) {
+				var _this2 = this;
+
 				var text = document.querySelector('.textarea');
 				//save to indexdb
 				this.state.db.texts.add({
@@ -55460,6 +55472,13 @@
 					window.navigator.serviceWorker.ready.then(function (sworker) {
 						sworker.sync.register('syncoffline').then(function (e) {
 							console.log('registered sync', e);
+							_this2.setState({
+								resp: "Thank you for your message"
+							}, function () {
+								_this2.timer = setTimeout(function () {
+									_this2.setState({ resp: null });
+								}, 3000);
+							});
 						});
 					});
 				}).catch(function (e) {
@@ -55499,7 +55518,8 @@
 							'button',
 							{ className: 'button', onClick: this.save.bind(this) },
 							'Save offline'
-						)
+						),
+						_react2.default.createElement(_Alert2.default, { msg: this.state.resp })
 					)
 				);
 			}
@@ -79368,6 +79388,35 @@
 	    return Boolean(typeis(req, type));
 	  };
 	}
+
+/***/ },
+/* 402 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(84);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Alert = function Alert(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'alert ' + (props.msg ? 'visible' : '') },
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      props.msg
+	    )
+	  );
+	};
+	exports.default = Alert;
 
 /***/ }
 /******/ ]);

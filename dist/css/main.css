@@ -1428,6 +1428,25 @@ body {
   resize: none;
   margin: 0 0 1em; }
 
+.alert {
+  font-size: 1em;
+  color: #fff;
+  background-color: #333;
+  padding: 0.1em 1em;
+  line-height: 1.2;
+  border-radius: 3px;
+  position: fixed;
+  font-weight: 300;
+  margin: 1em;
+  left: 0;
+  min-height: 50px;
+  right: 0;
+  bottom: -100%;
+  transition: all 0.3s ease-in; }
+  .alert.visible {
+    bottom: 0;
+    transition: all 0.3s ease-out; }
+
 .topbar {
   background-color: #3269ff;
   width: 100%;
@@ -1503,7 +1522,8 @@ ul {
   .sidemenuWrapper .head {
     font-size: 1.6em;
     font-weight: 300;
-    padding: 0 1rem 0.5rem;
+    padding: 0.7rem 1rem 1rem;
+    margin-bottom: 0.7rem;
     border-bottom: 1px solid #ccc; }
   .sidemenuWrapper.open {
     background-color: rgba(0, 0, 0, 0.3);

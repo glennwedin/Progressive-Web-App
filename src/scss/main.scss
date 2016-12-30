@@ -31,5 +31,26 @@ body{
 	margin: 0 0 1em;
 }
 
+.alert{
+	font-size: 1em;
+  color: #fff;
+  background-color: #333;
+  padding: 0.1em 1em;
+  line-height: 1.2;
+  border-radius: 3px;
+  position: fixed;
+  font-weight: 300;
+  margin: 1em;
+  left: 0;
+  min-height: 50px;
+  right: 0;
+  bottom: -100%;
+  transition: all 0.3s ease-in;
+
+	&.visible{
+		bottom: 0;
+		transition: all 0.3s ease-out;
+	}
+}
 
 @import 'shell.scss';

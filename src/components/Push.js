@@ -1,29 +1,30 @@
 import React from 'react';
+import Alert from './Alert';
 
 export default class Push extends React.Component {
 	swRegistration = "test";
+	timer = null;
 
 	constructor() {
 		super();
 		this.state = {
-			resp: ""
+			resp: null
 		}
 	}
+
+	componentWillUnmount() {
+		clearTimeout(this.timer);
+	}
+
 	subscribe() {
 		//register service worker and send
 		var isSubscribed;
 
 		if ('serviceWorker' in navigator && 'PushManager' in window) {
 		  console.log('Service Worker and Push is supported');
-		  /*navigator.serviceWorker.register('sw.js').then((swReg) => {
-		      console.log('Service Worker is registered', swReg);*/
-		      navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
-		          this.subscreibUser(serviceWorkerRegistration);
-		      });
-		    /*})
-		    .catch(function(error) {
-		      console.error('Service Worker Error', error);
-		    });*/
+		  navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+		      this.subscreibUser(serviceWorkerRegistration);
+		  });
 		} else {
 		  console.warn('Push messaging is not supported');
 		}
@@ -55,7 +56,11 @@ export default class Push extends React.Component {
 			if(xhr.readyState === 4 && xhr.status === 200) {
 				this.setState({
 					resp: "Thanks, you will receive a push message within 60 seconds"
-				})
+				}, () => {
+						this.timer = setTimeout(() => {
+							this.setState({resp:null})
+						}, 3000);
+				});
 			}
 		}
 		xhr.send(JSON.stringify({subscription: sub}));
@@ -82,11 +87,7 @@ export default class Push extends React.Component {
 					<div className="desc"><p>Register for a push message. You will receive the push message within a minute from registering
 					and you will then be forgotten forever</p></div>
 					<button className="button" onClick={this.subscribe.bind(this)}>Get a push message</button>
-					{this.state.resp ?
-					<div className="alert">
-						<p>{this.state.resp}</p>
-					</div>
-					: ''}
+					<Alert msg={this.state.resp} />
 				</div>
 			</div>
 		)
