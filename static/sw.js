@@ -1,7 +1,7 @@
 //OFFLINE
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('v1').then(function(cache) {
+   caches.open('v3').then(function(cache) {
      return cache.addAll([
        '/',
        '/offline',
@@ -16,7 +16,7 @@ self.addEventListener('install', function(e) {
 
 self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
-  var cacheWhitelist = ['v1'];
+  var cacheWhitelist = ['v3'];
 
   event.waitUntil(
     caches.keys().then(function(keyList) {

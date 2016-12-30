@@ -22,8 +22,10 @@ export default class ServerSentEvents extends React.Component {
           <div className="row">
     				<div className="columns small-12">
               <h1>Server sent events</h1>
-              <p>This has nothing to do with progressive web apps or service workers.
-              It's just for fun</p>
+              <div className="desc">
+                  <p>This has nothing to do with progressive web apps or service workers.
+                  It's just for fun</p>
+              </div>
 
               <strong>Data sent from the server:</strong>
               <ul>
