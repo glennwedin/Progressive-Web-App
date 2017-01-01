@@ -20,7 +20,7 @@ export default class ServerSentEvents extends React.Component {
     render() {
         return (
           <div className="row">
-    				<div className="columns small-12">
+    		<div className="columns small-12">
               <h1>Server sent events</h1>
               <div className="desc">
                   <p>This has nothing to do with progressive web apps or service workers.

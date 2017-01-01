@@ -6,7 +6,7 @@
   "background_color": "#fff",
   "description": "A progressive web app",
   "icons": [{
-    "src": "https://www.wedinweb.no/img/logocircel.png",
+    "src": "/icon.png",
     "sizes": "144x144",
     "type": "image/png"
   }],

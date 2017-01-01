@@ -13,15 +13,6 @@ export default class Front extends React.Component{
 		this.props.store.addItem('tufsing');
 	}
 
-	/*
-	<ul>
-		{this.props.store.items.map((res, i) => {
-			return(<div key={res.id}>{res.name}</div>)
-		})}
-	</ul>
-	<button className="button" onClick={this.add.bind(this)}>Add stuff to mobx</button>
-	*/
-
 	render() {
 		return (
 			<div className="row">

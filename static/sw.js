@@ -6,6 +6,7 @@ self.addEventListener('install', function(e) {
        '/',
        '/offline',
        '/pushmessages',
+       '/serversentevents',
        '/css/main.css',
        '/client.js',
 	   '/manifest.webmanifest'
@@ -42,8 +43,8 @@ self.addEventListener('push', function(event) {
   const title = 'Push fra PWA POC';
   const options = {
     body: event.data.text(), //Your push message - event.data.text() for instance
-    icon: '', //image
-    badge: '' ////image
+    icon: '/icon.png', //image
+    badge: '/icon.png' ////image
   };
   event.waitUntil(self.registration.showNotification(title, options));
 });
@@ -95,8 +96,8 @@ function doSync() {
                     const title = 'Background sync is done';
                     const options = {
                       body: "The data you saved have been synced with the server", //Your push message - event.data.text() for instance
-                      icon: '', //image
-                      badge: '' ////image
+                      icon: '/icon.png', //image
+                      badge: '/icon.png' ////image
                     };
                     self.registration.showNotification(title, options);
                 })
