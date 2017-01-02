@@ -50,7 +50,7 @@ export default class Push extends React.Component {
 
 	persist(sub) {
 		let xhr = new XMLHttpRequest();
-		xhr.open('POST', 'http://localhost:3000/api/push');
+		xhr.open('POST', 'https://pwa.wedinweb.no/api/push');
 		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xhr.onreadystatechange = () => {
 			if(xhr.readyState === 4 && xhr.status === 200) {

@@ -85,7 +85,7 @@ function doSync() {
     return new Promise((res, rej) => {
         let data = getOfflineData();
         data.then((d) => {
-            fetch('http://localhost:3000/api/offline', {
+            fetch('https://pwa.wedinweb.no/api/offline', {
                 method: 'post',
                 headers: {
                   "Content-type": "application/json; charset=UTF-8"
