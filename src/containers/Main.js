@@ -3,11 +3,9 @@ import { Link } from "react-router";
 import { Provider, observer } from 'mobx-react';
 import Top from '../components/Top';
 import Menu from '../components/Menu';
-import Items from '../stores/Items';
 import SSE from '../stores/SSE';
 
-let store = new Items,
-		SSEStore = new SSE;
+let SSEStore = new SSE;
 
 @observer
 class Main extends React.Component {
@@ -27,7 +25,7 @@ class Main extends React.Component {
 
 	render () {
 		return (
-				<Provider store={store} ssestore={SSEStore}>
+				<Provider ssestore={SSEStore}>
 					<html lang="en">
 						<head>
 							<meta charSet="UTF-8" />

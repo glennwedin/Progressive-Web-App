@@ -1,7 +1,5 @@
 import React from 'react';
-import {observer, inject} from 'mobx-react';
 
-@inject('store') @observer
 export default class Front extends React.Component{
 	constructor (props) {
 		super(props);

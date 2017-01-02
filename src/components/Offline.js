@@ -64,7 +64,7 @@ export default class Offline extends React.Component {
 					<div className="desc"><p>If you are offline, the text is stored on your phone and will be persisted to a server automatically
 					when you have a connection</p></div>
 				</div>
-				<div className="medium-6 columns">
+				<div className="medium-6 columns paddingtop">
 					<label>Write a note to be stored offline</label>
 					<div className="textarea" onKeyUp={this.textchange.bind(this)} contentEditable="true"></div>
 					<button className="button" onClick={this.save.bind(this)}>Save offline</button>

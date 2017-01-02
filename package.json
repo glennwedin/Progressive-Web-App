@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "devstart": "nodemon ./dist/server.js",
-    "dev": "webpack --watch",
+    "dev": "webpack --config webpack.dev-config.js --watch",
     "start": "node ./dist/server.js",
-    "buildProd": "webpack --optimize-minimize"
+    "buildProd": "webpack --config webpack.prod-config.js --optimize-minimize"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",

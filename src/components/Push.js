@@ -50,7 +50,7 @@ export default class Push extends React.Component {
 
 	persist(sub) {
 		let xhr = new XMLHttpRequest();
-		xhr.open('POST', 'https://pwa.wedinweb.no/api/push');
+		xhr.open('POST', '/api/push');
 		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xhr.onreadystatechange = () => {
 			if(xhr.readyState === 4 && xhr.status === 200) {
@@ -82,13 +82,13 @@ export default class Push extends React.Component {
 	render() {
 		return (
 			<div className="row">
-				<div className="columns small-12 medium-6">
+				<div className="columns small-12">
 					<h1>Push notifications</h1>
 					<div className="desc"><p>Register for a push message. You will receive the push message within a minute from registering
 					and you will then be forgotten forever</p></div>
 				</div>
-				<div className="columns small-12 medium-6">
-					<button className="button" onClick={this.subscribe.bind(this)}>Get a push message</button>
+				<div className="columns small-12">
+					<button className="button right" onClick={this.subscribe.bind(this)}>Get a push message</button>
 					<Alert msg={this.state.resp} />
 				</div>
 			</div>

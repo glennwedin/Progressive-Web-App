@@ -40,7 +40,7 @@ self.addEventListener('fetch', event => {
 
 ///PUSH
 self.addEventListener('push', function(event) {
-  const title = 'Push fra PWA POC';
+  const title = '';
   const options = {
     body: event.data.text(), //Your push message - event.data.text() for instance
     icon: '/icon.png', //image
@@ -85,7 +85,7 @@ function doSync() {
     return new Promise((res, rej) => {
         let data = getOfflineData();
         data.then((d) => {
-            fetch('https://pwa.wedinweb.no/api/offline', {
+            fetch('/api/offline', {
                 method: 'post',
                 headers: {
                   "Content-type": "application/json; charset=UTF-8"
@@ -95,7 +95,7 @@ function doSync() {
                 data.json().then((d) => {
                     const title = 'Background sync is done';
                     const options = {
-                      body: "The data you saved have been synced with the server", //Your push message - event.data.text() for instance
+                      body: "Data have been synced with the server", //Your push message - event.data.text() for instance
                       icon: '/icon.png', //image
                       badge: '/icon.png' ////image
                     };
