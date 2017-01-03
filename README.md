@@ -9,3 +9,11 @@ npm run buildProd
 npm start
 
 ```
+
+To use push messages you need to generate a set of vapid keys to use during subscription
+and sending pushmessages. Don't use the ones provided... they are just for testing...
+
+```
+npm i web-push -g
+web-push generate-vapid-keys [--json]
+```
