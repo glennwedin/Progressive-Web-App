@@ -7,7 +7,6 @@ Buildt as a universal app on react, mobx and express.js
 yarn install
 npm run buildProd
 npm start
-
 ```
 
 To use push messages you need to generate a set of vapid keys to use during subscription
