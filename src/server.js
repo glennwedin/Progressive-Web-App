@@ -64,7 +64,6 @@ function pushService() {
 	setInterval(() => {
 		let i = queue.length;
 		while(i--) {
-			console.log(i)
 			const pushSubscription = queue.pop(); //your subscription object
 			const payload = 'Dette er en pushmelding fra PWA POC :)';
 			if(pushSubscription) {
@@ -90,7 +89,6 @@ function pushService() {
 				});
 			}
 		}
-		console.log('done')
 	}, 60000);
 }
 //Listen on port

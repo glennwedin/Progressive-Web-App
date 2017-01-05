@@ -1,7 +1,8 @@
 //OFFLINE
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('v4').then(function(cache) {
+   caches.open('v5').then(function(cache) {
+     //Add all resources to cache
      return cache.addAll([
        '/',
        '/offline',
@@ -17,8 +18,8 @@ self.addEventListener('install', function(e) {
 
 self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
-  var cacheWhitelist = ['v4'];
-
+  //Remove old caches
+  var cacheWhitelist = ['v5'];
   event.waitUntil(
     caches.keys().then(function(keyList) {
       return Promise.all(keyList.map(function(key) {
@@ -31,6 +32,7 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  //Proxy the request and respond from cache
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request);
@@ -40,7 +42,7 @@ self.addEventListener('fetch', event => {
 
 ///PUSH
 self.addEventListener('push', function(event) {
-  const title = '';
+  const title = 'Push message';
   const options = {
     body: event.data.text(), //Your push message - event.data.text() for instance
     icon: '/icon.png', //image
@@ -49,6 +51,7 @@ self.addEventListener('push', function(event) {
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
+//Function for fetching data from indexedDB
 function getOfflineData() {
     return new Promise((res, rej) => {
         let request = self.indexedDB.open("text"),
@@ -81,6 +84,7 @@ function getOfflineData() {
     });
 }
 
+//Function to sync data between app and server
 function doSync() {
     return new Promise((res, rej) => {
         let data = getOfflineData();
@@ -108,7 +112,7 @@ function doSync() {
     });
 }
 
-//Background sync
+//Trigger background sync
 self.addEventListener('sync', function(event) {
   if (event.tag == 'syncoffline') {
      event.waitUntil(doSync());
