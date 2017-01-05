@@ -4,7 +4,7 @@ Contains push messaging, cache api, indexedDB, server sent events and background
 Buildt as a universal app on react, mobx and express.js
 
 ```
-yarn install
+npm install OR yarn install
 npm run buildProd
 npm start
 ```
