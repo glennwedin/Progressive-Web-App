@@ -1,7 +1,7 @@
 //OFFLINE
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('v5').then(function(cache) {
+   caches.open('v1').then(function(cache) {
      //Add all resources to cache
      return cache.addAll([
        '/',
@@ -19,7 +19,7 @@ self.addEventListener('install', function(e) {
 self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
   //Remove old caches
-  var cacheWhitelist = ['v5'];
+  var cacheWhitelist = ['v1'];
   event.waitUntil(
     caches.keys().then(function(keyList) {
       return Promise.all(keyList.map(function(key) {
