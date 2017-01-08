@@ -58,13 +58,16 @@ export default class Offline extends React.Component {
 
 	render() {
 		return (
-			<div className="row">
-				<div className="medium-6 columns">
-					<h1>Notes</h1>
-					<div className="desc"><p>If you are offline, the text is stored on your phone and will be persisted to a server automatically
-					when you have a connection</p></div>
+			<div>
+				<div className="row">
+					<div className="">
+						<h1>Notes</h1>
+						<div className="desc"><p>If you are offline, the text is stored on your phone and will be persisted to a server automatically
+						when you have a connection</p></div>
+					</div>
 				</div>
-				<div className="medium-6 columns paddingtop">
+				<div className="fullblock">
+					<h2>Try it out</h2>
 					<label>Write a note to be stored offline</label>
 					<div className="textarea" onKeyUp={this.textchange.bind(this)} contentEditable="true"></div>
 					<button className="button" onClick={this.save.bind(this)}>Save offline</button>

@@ -82,12 +82,12 @@ export default class Push extends React.Component {
 	render() {
 		return (
 			<div className="row">
-				<div className="columns small-12">
+				<div className="column">
 					<h1>Push notifications</h1>
 					<div className="desc"><p>Register for a push message. You will receive the push message within a minute from registering
 					and you will then be forgotten forever</p></div>
 				</div>
-				<div className="columns small-12">
+				<div className="column">
 					<button className="button right" onClick={this.subscribe.bind(this)}>Get a push message</button>
 					<Alert msg={this.state.resp} />
 				</div>

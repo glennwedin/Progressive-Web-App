@@ -18,11 +18,14 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
     "compression-webpack-plugin": "^0.3.2",
+    "css-loader": "^0.26.1",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.0.0",
     "gulp-watch": "^4.3.11",
     "json-loader": "^0.5.4",
     "node-sass": "^4.0.0",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
   },
   "dependencies": {

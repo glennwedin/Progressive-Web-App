@@ -65,7 +65,7 @@ function pushService() {
 		let i = queue.length;
 		while(i--) {
 			const pushSubscription = queue.pop(); //your subscription object
-			const payload = 'Dette er en pushmelding fra PWA POC :)';
+			const payload = 'This is the push message you asked for :)';
 			if(pushSubscription) {
 				const options = {
 				  vapidDetails: {

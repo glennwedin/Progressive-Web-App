@@ -36,15 +36,11 @@ export default class Top extends React.Component {
 		return (
 			<div className="topbar">
 				<div className="row">
-					<div className="columns small-2" onClick={this.props.toggle}>
-						<div className="centered">
-							|||
-						</div>
+					<div className="menutoggle" onClick={this.props.toggle}>
+						|||
 					</div>
-					<div className="columns small-9">
-						<div className="title">Progressive web app</div>
-					</div>
-					<div className="columns small-1">
+					<div className="title">Progressive web app</div>
+					<div className="netstatus">
 						{this.state.isOnline ? "" : "!"}
 					</div>
 				</div>

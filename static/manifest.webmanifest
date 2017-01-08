@@ -1,6 +1,6 @@
 {
-  "name": "PWA",
-  "short_name": "PWA",
+  "name": "Progressive Web App",
+  "short_name": "Progressive Web App",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#fff",

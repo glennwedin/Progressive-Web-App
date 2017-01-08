@@ -24,14 +24,13 @@ class Main extends React.Component {
 	}
 
 	render () {
-
 		return (
 				<Provider ssestore={SSEStore}>
 					<html lang="en">
 						<head>
 							<meta charSet="UTF-8" />
 							<meta name="viewport" content="width=device-width" />
-							<title>Home</title>
+							<title>Progressive Wep App</title>
 							<link rel="manifest" href="/manifest.webmanifest" />
 							<link rel="stylesheet" href="css/shell.css" type="text/css" />
 						</head>
@@ -40,7 +39,6 @@ class Main extends React.Component {
 							<Top toggle={this.toggleMenu.bind(this)} />
 							<div id="app">{this.props.children}</div>
 
-							<link rel="stylesheet" href="css/main.css" type="text/css" />
 							<script src="/serviceWorkerInstaller.js"></script>
 							<script type="text/javascript" src="/client.js"></script>
 						</body>

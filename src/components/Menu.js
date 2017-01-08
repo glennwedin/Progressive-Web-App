@@ -9,7 +9,7 @@ export default class Menu extends React.Component {
 	render() {
 		return (
 			<div onClick={this.props.toggle} className={'sidemenuWrapper '+ (this.props.open ? 'open' : '')}>
-				<div className="columns sidemenu">
+				<div className="column sidemenu">
 					<div className="head">Menu</div>
 					<ul>
 						<li><Link to="/" onClick={this.props.toggle}>Home</Link></li>

@@ -8,8 +8,8 @@ self.addEventListener('install', function(e) {
        '/offline',
        '/pushmessages',
        '/serversentevents',
-       '/css/main.css',
        '/client.js',
+       '/css/shell.css',
 	   '/manifest.webmanifest'
      ]).then(() => self.skipWaiting());
    })

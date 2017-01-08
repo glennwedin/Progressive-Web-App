@@ -19,6 +19,9 @@ module.exports = [{
 					"transform-decorators-legacy"
 				]
             }
+        }, {
+            test: /\.scss$/,
+            loaders: ["style", "css", "scss", "sass"]
         }]
     },
 	plugins: [

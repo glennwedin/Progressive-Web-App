@@ -13,14 +13,10 @@ export default class ServerSentEvents extends React.Component {
         this.props.ssestore.listenForEvents();
     }
 
-    componentWillUnmount() {
-        this.props.ssestore.stopListening();
-    }
-
     render() {
         return (
           <div className="row">
-    		<div className="columns small-12">
+    		<div className="column">
               <h1>Server sent events</h1>
               <div className="desc">
                   <p>This has nothing to do with progressive web apps or service workers.
@@ -30,7 +26,7 @@ export default class ServerSentEvents extends React.Component {
               <strong>Data sent from the server:</strong>
               <ul>
                 {this.props.ssestore.items.map((obj, i) => {
-                  return <li className="msg" key={obj.id}>{obj.msg}</li>
+                  return <li className="msg desc" key={obj.id}>{obj.msg}</li>
                 })}
               </ul>
             </div>
