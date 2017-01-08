@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "devstart": "nodemon ./dist/server.js",
-    "dev": "webpack --config webpack.dev-config.js --watch",
+    "dev": "webpack --config webpack.dev-config.js --watch | gulp",
     "start": "node ./dist/server.js",
-    "buildProd": "webpack --config webpack.prod-config.js --optimize-minimize"
+    "buildProd": "webpack --config webpack.prod-config.js --optimize-minimize && gulp build"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",
@@ -18,23 +18,22 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
     "compression-webpack-plugin": "^0.3.2",
-    "css-loader": "^0.26.1",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.0.0",
+    "gulp-watch": "^4.3.11",
     "json-loader": "^0.5.4",
-    "mobx": "^2.7.0",
-    "mobx-react": "^4.0.3",
     "node-sass": "^4.0.0",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-router": "^3.0.0",
-    "sass-loader": "^4.0.2",
-    "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "dexie": "^1.5.1",
     "express": "^4.14.0",
+    "mobx": "^2.7.0",
+    "mobx-react": "^4.0.3",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-router": "^3.0.0",
     "web-push": "^3.2.1"
   }
 }

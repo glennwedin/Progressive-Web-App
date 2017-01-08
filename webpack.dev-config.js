@@ -1,5 +1,4 @@
 var webpack = require('webpack'),
-ExtractTextPlugin = require('extract-text-webpack-plugin'),
 CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = [{
@@ -20,16 +19,9 @@ module.exports = [{
 					"transform-decorators-legacy"
 				]
             }
-        }, {
-            test: /\.scss$/,
-            loaders: [ExtractTextPlugin.extract('style'),
-				         'css?modules&importLoaders=1&localIdentName=[local]',
-				         'sass?sourceMap&config=sassLoader'
-					 ]
         }]
     },
 	plugins: [
-		new ExtractTextPlugin("../dist/css/[name].css"),
 	    new CompressionPlugin({
 	        asset: "[path].gz[query]",
 	        algorithm: "gzip",
