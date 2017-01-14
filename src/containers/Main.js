@@ -30,6 +30,7 @@ class Main extends React.Component {
 						<head>
 							<meta charSet="UTF-8" />
 							<meta name="viewport" content="width=device-width" />
+							<meta name="theme-color" content="#3269ff" />
 							<title>Progressive Wep App</title>
 							<link rel="manifest" href="/manifest.webmanifest" />
 							<link rel="stylesheet" href="css/shell.css" type="text/css" />
