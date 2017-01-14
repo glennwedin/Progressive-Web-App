@@ -33,11 +33,11 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   //Proxy the request and respond from cache
-  event.respondWith(
+  /*event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request);
     })
-  );
+);*/
 });
 
 ///PUSH

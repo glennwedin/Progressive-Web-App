@@ -12,7 +12,7 @@ module.exports = [{
         loaders: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel',
+            loader: 'babel-loader',
             query: {
                 presets: ['react', 'es2015', 'stage-1'],
                 plugins: [
@@ -31,12 +31,7 @@ module.exports = [{
 	        test: /\.js$|\.html$/,
 	        threshold: 10240,
 	        minRatio: 0.8
-	    }),
-		new webpack.DefinePlugin({
-		  'process.env': {
-		    NODE_ENV: JSON.stringify('development')
-		  }
-		})
+	    })
 	]
 }, {
 	name: "server",
@@ -49,10 +44,13 @@ module.exports = [{
     module: {
         loaders: [{
             test: /\.js$/,
-            loader: 'babel',
+            loader: 'babel-loader',
 			query: {
                 presets: ['react', 'es2015', 'stage-1'],
-                plugins: ["transform-decorators-legacy"]
+                plugins: [
+					"transform-decorators-legacy",
+					"system-import-transformer"
+				]
             }
         }, {
             test: /\.json$/,
@@ -60,10 +58,6 @@ module.exports = [{
         }]
     },
 	plugins: [
-		new webpack.DefinePlugin({
-		  'process.env': {
-		    NODE_ENV: JSON.stringify('development')
-		  }
-		})
+		new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
 	]
 }]

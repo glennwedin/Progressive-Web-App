@@ -1,8 +1,8 @@
 import express from "express";
 import React from "react";
-import { match, RouterContext } from "react-router";
-import { renderToString } from 'react-dom/server';
-import mainroute from "./routers/routes";
+import { renderToString, } from 'react-dom/server';
+import { createServerRenderContext } from 'react-router';
+import { serverRoute } from "./routers/routes";
 import path from "path";
 import webpush from 'web-push';
 import bodyParser from 'body-parser';
@@ -39,25 +39,36 @@ app.get('/api/sse', function(req, res) {
 });
 
 
-app.get('*', function (req, res) {
-	let routes = mainroute();
-	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-		if (error) {
-			res.status(500).send(error.message)
-		} else if (redirectLocation) {
-			res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-		} else if (renderProps) {
-			res.status(200).send('<!DOCTYPE html>'+renderToString(<RouterContext {...renderProps} />));
-		} else {
-			res.status(404).send('Not found')
-		}
-	})
+app.get('*', function(req, res) {
+    let context = createServerRenderContext();
+    let router = serverRoute(req, context);
+    // render the first time
+    let markup = renderToString(
+		router
+	);
+	
+    // get the result
+    const result = context.getResult()
+    if (result.redirect) {
+        res.writeHead(301, {
+            Location: result.redirect.pathname
+        })
+        res.end()
+    } else {
+        if (result.missed) {
+            res.writeHead(404);
+            markup = "nei";
+            res.write(markup)
+            res.end()
+        }
+    }
+	res.send(markup)
 });
 
 function timedEventEmitter() {
-		setInterval(() => {
-				em.emit('sseevent', 'message with number: #'+ Math.round(Math.random(2000, 1000000)*100000))
-		}, 5000);
+	setInterval(() => {
+		em.emit('sseevent', 'message with number: #'+ Math.round(Math.random(2000, 1000000)*100000))
+	}, 5000);
 }
 
 function pushService() {
