@@ -1,8 +1,14 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, Match } from "react-router";
 import { Provider, observer } from 'mobx-react';
 import Top from '../components/Top';
 import Menu from '../components/Menu';
+
+import Front from '../components/Front';
+import Push from '../components/Push';
+import Offline from '../components/Offline';
+import ServerSentEvents from '../components/ServerSentEvents';
+
 import SSE from '../stores/SSE';
 
 let SSEStore = new SSE;
@@ -38,7 +44,12 @@ class Main extends React.Component {
 						<body>
 							<Menu open={this.state.menu} toggle={this.toggleMenu.bind(this)} />
 							<Top toggle={this.toggleMenu.bind(this)} />
-							<div id="app">{this.props.children}</div>
+							<div id="app">
+								<Match exactly pattern="/" component={Front} />
+								<Match exactly pattern="/pushmessages" component={Push} />
+								<Match exactly pattern="/offline" component={Offline} />
+								<Match exactly pattern="/serversentevents" component={ServerSentEvents} />
+							</div>
 
 							<script src="/serviceWorkerInstaller.js"></script>
 							<script type="text/javascript" src="/client.js"></script>
