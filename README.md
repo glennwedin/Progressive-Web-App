@@ -1,4 +1,5 @@
-# Progressive-Web-App
+# Progressive Web App starter
+## React, MobX, React-Router 4, Webpack 2 and Express.js
 
 A starter for progressive web apps.
 It contains push messaging, cache api, indexedDB, background sync and server sent events (not really anything to do with PWA's).
