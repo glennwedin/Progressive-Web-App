@@ -1,11 +1,11 @@
 # Progressive-Web-App
 
-## Develop-branch. (experimental - react-router 4, webpack 2)
-
 A starter for progressive web apps.
-Contains push messaging, cache api, indexedDB, server sent events and background sync.
-Buildt as a universal app on react, mobx and express.js
+It contains push messaging, cache api, indexedDB, background sync and server sent events (not really anything to do with PWA's).
+Buildt as a universal app on react, mobx and express.js. It also uses react-router 4 which is still in alpha
+and the release-candidate of webpack 2
 
+## How to run
 ```
 npm install OR yarn install
 npm run buildProd
