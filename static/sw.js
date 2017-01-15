@@ -57,7 +57,6 @@ function getOfflineData() {
         let request = self.indexedDB.open("text"),
             db;
 
-        //Do we really need to here?
         request.onupgradeneeded = function(event) {
             db = event.target.result;
             // Create an objectStore for this database
