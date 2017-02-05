@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Match } from "react-router";
+import { Match } from "react-router";
 import { Provider, observer } from 'mobx-react';
 import Top from '../components/Top';
 import Menu from '../components/Menu';
@@ -11,7 +11,7 @@ import ServerSentEvents from '../components/ServerSentEvents';
 
 import SSE from '../stores/SSE';
 
-let SSEStore = new SSE;
+let SSEStore = new SSE();
 
 @observer
 class Main extends React.Component {
@@ -20,7 +20,7 @@ class Main extends React.Component {
 		super(props);
 		this.state = {
 			menu: false
-		}
+		};
 	}
 
 	toggleMenu() {

@@ -1,5 +1,6 @@
+"use strict";
 import React from "react";
-import {Match, Miss, ServerRouter, BrowserRouter } from 'react-router'
+import {Match, ServerRouter, BrowserRouter } from 'react-router';
 import Main from "../containers/Main";
 
 let serverRoute = (req, context) => {
@@ -16,5 +17,5 @@ let browserRoute = () => {
 			<Match pattern="/*" component={Main} />
 		</BrowserRouter>
 	);
-}
-export { serverRoute, browserRoute }
+};
+export { serverRoute, browserRoute };

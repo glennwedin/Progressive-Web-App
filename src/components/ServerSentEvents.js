@@ -1,3 +1,5 @@
+"use strict";
+
 import React from 'react';
 import {observer, inject} from 'mobx-react';
 
@@ -26,11 +28,11 @@ export default class ServerSentEvents extends React.Component {
               <strong>Data sent from the server:</strong>
               <ul>
                 {this.props.ssestore.items.map((obj, i) => {
-                  return <li className="msg desc" key={obj.id}>{obj.msg}</li>
+                  return <li className="msg desc" key={obj.id}>{obj.msg}</li>;
                 })}
               </ul>
             </div>
           </div>
-        )
+      );
     }
 }

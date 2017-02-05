@@ -1,19 +1,18 @@
+"use strict";
 import express from "express";
-import React from "react";
-import { renderToString, } from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 import { createServerRenderContext } from 'react-router';
 import { serverRoute } from "./routers/routes";
-import path from "path";
 import webpush from 'web-push';
 import bodyParser from 'body-parser';
 import EventEmitter from 'events';
 
 var app = express();
 var queue = [];
-var em = new EventEmitter;
+var em = new EventEmitter();
 //Point to static files
 app.use(express.static('dist/'));
-app.use(express.static('static/'))
+app.use(express.static('static/'));
 app.use(bodyParser.json());
 
 app.post('/api/push', function(req, res) {
@@ -46,32 +45,38 @@ app.get('*', function(req, res) {
     let markup = renderToString(
 		router
 	);
-	
+
     // get the result
-    const result = context.getResult()
+    let result = context.getResult();
     if (result.redirect) {
         res.writeHead(301, {
             Location: result.redirect.pathname
-        })
-        res.end()
+        });
+        res.end();
     } else {
         if (result.missed) {
             res.writeHead(404);
             markup = "nei";
-            res.write(markup)
-            res.end()
+            res.write(markup);
+            res.end();
         }
     }
-	res.send(markup)
+	res.send(markup);
 });
 
 function timedEventEmitter() {
 	setInterval(() => {
-		em.emit('sseevent', 'message with number: #'+ Math.round(Math.random(2000, 1000000)*100000))
+		em.emit('sseevent', 'message with number: #'+ Math.round(Math.random(2000, 1000000)*100000));
 	}, 5000);
 }
 
 function pushService() {
+	let success = (res) => {
+		console.log(res);
+	},
+	error = (err) => {
+		console.log(err);
+	};
 	setInterval(() => {
 		let i = queue.length;
 		while(i--) {
@@ -88,16 +93,12 @@ function pushService() {
 				  headers: {
 				    //'< header name >': '< header value >'
 				  }
-				}
+			  };
 				webpush.sendNotification(
 				  pushSubscription,
 				  payload,
 				  options
-				).then((res) => {
-				    console.log(res);
-				}).catch((err) => {
-				    console.log(err);
-				});
+			  ).then(success).catch(error);
 			}
 		}
 	}, 60000);
@@ -105,4 +106,4 @@ function pushService() {
 //Listen on port
 app.listen(3005);
 pushService();
-timedEventEmitter()
+timedEventEmitter();
