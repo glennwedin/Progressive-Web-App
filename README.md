@@ -3,7 +3,7 @@
 
 A starter for progressive web apps.
 It contains push messaging, cache api, indexedDB, background sync and server sent events (not really anything to do with PWA's).
-Buildt as a universal app on react, mobx and express.js. It also uses react-router 4 which is still in alpha
+Built as a universal app on react, mobx and express.js. It also uses react-router 4 which is still in alpha
 and the release-candidate of webpack 2
 
 ## How to run
