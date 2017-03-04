@@ -1,7 +1,6 @@
 "use strict";
 import express from "express";
 import { renderToString } from 'react-dom/server';
-import { createServerRenderContext } from 'react-router';
 import { serverRoute } from "./routers/routes";
 import webpush from 'web-push';
 import bodyParser from 'body-parser';
@@ -39,29 +38,28 @@ app.get('/api/sse', function(req, res) {
 
 
 app.get('*', function(req, res) {
-    let context = createServerRenderContext();
+    let context = {};
     let router = serverRoute(req, context);
     // render the first time
     let markup = renderToString(
-		router
-	);
+			router
+		);
 
     // get the result
-    let result = context.getResult();
-    if (result.redirect) {
+    if (context.url) {
         res.writeHead(301, {
-            Location: result.redirect.pathname
+            Location: context.url
         });
         res.end();
     } else {
-        if (result.missed) {
+        if (context.missed) {
             res.writeHead(404);
-            markup = "nei";
+            markup = "404";
             res.write(markup);
             res.end();
         }
+				res.send(markup);
     }
-	res.send(markup);
 });
 
 function timedEventEmitter() {

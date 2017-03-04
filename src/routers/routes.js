@@ -1,20 +1,20 @@
 "use strict";
 import React from "react";
-import {Match, ServerRouter, BrowserRouter } from 'react-router';
+import {Route, StaticRouter, BrowserRouter } from 'react-router-dom';
 import Main from "../containers/Main";
 
 let serverRoute = (req, context) => {
 	return (
-		<ServerRouter location={req.url} context={context}>
-			<Match pattern="/*" component={Main} />
-		</ServerRouter>
+		<StaticRouter location={req.url} context={context}>
+			<Route path="/*" component={Main} />
+		</StaticRouter>
 	);
 };
 
 let browserRoute = () => {
 	return (
 		<BrowserRouter>
-			<Match pattern="/*" component={Main} />
+			<Route path="/*" component={Main} />
 		</BrowserRouter>
 	);
 };

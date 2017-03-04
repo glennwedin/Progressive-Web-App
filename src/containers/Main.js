@@ -1,5 +1,5 @@
 import React from "react";
-import { Match } from "react-router";
+import { Route } from "react-router";
 import { Provider, observer } from 'mobx-react';
 import Top from '../components/Top';
 import Menu from '../components/Menu';
@@ -45,12 +45,11 @@ class Main extends React.Component {
 							<Menu open={this.state.menu} toggle={this.toggleMenu.bind(this)} />
 							<Top toggle={this.toggleMenu.bind(this)} />
 							<div id="app">
-								<Match exactly pattern="/" component={Front} />
-								<Match exactly pattern="/pushmessages" component={Push} />
-								<Match exactly pattern="/offline" component={Offline} />
-								<Match exactly pattern="/serversentevents" component={ServerSentEvents} />
+								<Route exact path="/" component={Front} />
+								<Route exact path="/pushmessages" component={Push} />
+								<Route exact path="/offline" component={Offline} />
+								<Route exact path="/serversentevents" component={ServerSentEvents} />
 							</div>
-
 							<script src="/serviceWorkerInstaller.js"></script>
 							<script type="text/javascript" src="/client.js"></script>
 						</body>
