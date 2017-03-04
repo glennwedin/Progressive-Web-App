@@ -15,10 +15,7 @@ export default class Top extends React.Component {
 	}
 
 	checkConnection() {
-		/*let isOnline = true,
-		goodConnection = true;*/
-
-		if(navigator.connectionn || navigator.mozConnection || navigator.webkitConnection) {
+		if(navigator.connection || navigator.mozConnection || navigator.webkitConnection) {
 			let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection,
 				type = connection.type;
 			setInterval(() => {
