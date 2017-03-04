@@ -1,0 +1,16 @@
+{
+  "globals"   : {},
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "freeze": true,
+  "indent": 2,
+  "latedef": true,
+  "laxcomma": true,
+  "node": true,
+  "trailing": true,
+  "strict": true,
+  "unused": "vars",
+  "undef": true,
+  "esversion":6
+}

@@ -1,3 +1,5 @@
+/* globals navigator */
+"use strict";
 import React from 'react';
 
 export default class Top extends React.Component {
@@ -5,7 +7,7 @@ export default class Top extends React.Component {
 		super();
 		this.state = {
 			isOnline: true
-		}
+		};
 	}
 
 	componentDidMount() {
@@ -13,10 +15,7 @@ export default class Top extends React.Component {
 	}
 
 	checkConnection() {
-		let isOnline = true,
-		goodConnection = true;
-
-		if(navigator.connectionn || navigator.mozConnection || navigator.webkitConnection) {
+		if(navigator.connection || navigator.mozConnection || navigator.webkitConnection) {
 			let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection,
 				type = connection.type;
 			setInterval(() => {
@@ -27,8 +26,8 @@ export default class Top extends React.Component {
 			setInterval(() => {
 				this.setState({
 					isOnline: navigator.onLine
-				})
-			}, 3000)
+				});
+			}, 3000);
 		}
 	}
 
@@ -45,6 +44,6 @@ export default class Top extends React.Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
