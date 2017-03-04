@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router";
+import { Route } from "react-router-dom";
 import { Provider, observer } from 'mobx-react';
 import Top from '../components/Top';
 import Menu from '../components/Menu';
