@@ -16,7 +16,9 @@ module.exports = [{
             query: {
                 presets: ['react', 'es2015', 'stage-1'],
                 plugins: [
-					"transform-decorators-legacy"
+					'transform-decorators-legacy',
+                    'transform-async-to-generator',
+                    'transform-regenerator'
 				]
             }
         }, {
@@ -48,7 +50,9 @@ module.exports = [{
 			query: {
                 presets: ['react', 'es2015', 'stage-1'],
                 plugins: [
-					"transform-decorators-legacy"
+					'transform-decorators-legacy',
+                    'transform-async-to-generator',
+                    'transform-regenerator'
 				]
             }
         }, {
