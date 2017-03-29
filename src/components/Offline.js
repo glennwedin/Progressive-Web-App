@@ -26,10 +26,6 @@ export default class Offline extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-		console.log('mount')
-	}
-
 	componentWillUnmount() {
 		clearTimeout(this.timer);
 	}
@@ -47,7 +43,6 @@ export default class Offline extends React.Component {
 				texts: res
 			})
 		});
-		
 	}
 
 	save(e) {
