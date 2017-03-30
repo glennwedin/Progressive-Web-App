@@ -36,7 +36,8 @@ export default class Offline extends React.Component {
 		});
 	}
 
-	delete(id, e) {
+	del(id, e) {
+		e.preventDefault();
 		this.state.db.texts.delete(id).then(async () => {
 			let res = await this.state.db.texts.toArray();
 			this.setState({
@@ -48,7 +49,9 @@ export default class Offline extends React.Component {
 	save(e) {
 		let text = document.querySelector('.textarea');
 		//save to indexdb
+		let id = Math.ceil(Math.random()*10000);
 		this.state.db.texts.add({
+			id: id,
 	  		content: this.state.text
 		}).then(() => {
 			text.innerHTML = '';
@@ -56,7 +59,7 @@ export default class Offline extends React.Component {
 			window.navigator.serviceWorker.ready.then((sworker) => {
 				sworker.sync.register('syncoffline').then((e) => {
 					let texts = this.state.texts;
-					texts.push({content: this.state.text, id: Math.random(3422,23423423)});
+					texts.push({content: this.state.text, id});
 					this.setState({
 						texts: texts,
 						resp: "Thank you for your message"
@@ -83,7 +86,7 @@ export default class Offline extends React.Component {
 					</div>
 					<ul>
 						{this.state.texts.map((obj, i) => {
-							return (<li key={obj.id}>{obj.content} -- <button onClick={this.delete.bind(this, obj.id)}>Slett</button></li>)
+							return (<li key={obj.id}>{obj.content} <button className="button small" onClick={this.del.bind(this, obj.id)}>Slett</button></li>)
 						})}
 					</ul>
 				</div>
