@@ -40,6 +40,8 @@ class Main extends React.Component {
 							<title>Progressive Wep App</title>
 							<link rel="manifest" href="/manifest.webmanifest" />
 							<link rel="stylesheet" href="css/shell.css" type="text/css" />
+							<script async src="/serviceWorkerInstaller.js"></script>
+							<script async src="/client.js"></script>
 						</head>
 						<body>
 							<Menu open={this.state.menu} toggle={this.toggleMenu.bind(this)} />
@@ -50,8 +52,6 @@ class Main extends React.Component {
 								<Route exact path="/offline" component={Offline} />
 								<Route exact path="/serversentevents" component={ServerSentEvents} />
 							</div>
-							<script src="/serviceWorkerInstaller.js"></script>
-							<script type="text/javascript" src="/client.js"></script>
 						</body>
 					</html>
 				</Provider>

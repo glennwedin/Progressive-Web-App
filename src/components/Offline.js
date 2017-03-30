@@ -13,8 +13,14 @@ export default class Offline extends React.Component {
 	        texts: "++id,content"
 	    });
 
+		db.texts.toArray().then((res) => {
+			this.setState({
+				texts: res
+			})
+		})
 		this.state = {
 			db: db,
+			texts: [],
 			text: "",
 			resp: null
 		}
@@ -30,18 +36,32 @@ export default class Offline extends React.Component {
 		});
 	}
 
+	del(id, e) {
+		e.preventDefault();
+		this.state.db.texts.delete(id).then(async () => {
+			let res = await this.state.db.texts.toArray();
+			this.setState({
+				texts: res
+			})
+		});
+	}
+
 	save(e) {
 		let text = document.querySelector('.textarea');
 		//save to indexdb
+		let id = Math.ceil(Math.random()*10000);
 		this.state.db.texts.add({
-	  	content: this.state.text,
-	  }).then(() => {
+			id: id,
+	  		content: this.state.text
+		}).then(() => {
 			text.innerHTML = '';
 			//register sync on service worker
 			window.navigator.serviceWorker.ready.then((sworker) => {
 				sworker.sync.register('syncoffline').then((e) => {
-					console.log('registered sync', e);
+					let texts = this.state.texts;
+					texts.push({content: this.state.text, id});
 					this.setState({
+						texts: texts,
 						resp: "Thank you for your message"
 					}, () => {
 							this.timer = setTimeout(() => {
@@ -53,7 +73,6 @@ export default class Offline extends React.Component {
 		}).catch(function(e) {
 			console.log(e)
 	  });
-
 	}
 
 	render() {
@@ -65,6 +84,11 @@ export default class Offline extends React.Component {
 						<div className="desc"><p>If you are offline, the text is stored on your phone and will be persisted to a server automatically
 						when you have a connection</p></div>
 					</div>
+					<ul>
+						{this.state.texts.map((obj, i) => {
+							return (<li key={obj.id}>{obj.content} <button className="button small" onClick={this.del.bind(this, obj.id)}>Slett</button></li>)
+						})}
+					</ul>
 				</div>
 				<div className="fullblock">
 					<h2>Try it out</h2>

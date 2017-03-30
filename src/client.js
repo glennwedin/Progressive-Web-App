@@ -1,5 +1,6 @@
 /* global document */
 import ReactDOM from "react-dom";
+import "babel-polyfill";
 import { browserRoute } from "./routers/routes";
 import "!style-loader!css-loader!sass-loader!./scss/main.scss";
 

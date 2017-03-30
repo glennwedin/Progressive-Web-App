@@ -65,6 +65,12 @@ p{
 	font-size: 1em;
     color: #fff;
     background-color: #3269ff;
+	cursor: pointer;
+	&.small{
+		padding: 0.4rem 0.5rem;
+	    text-transform: inherit;
+	    border-radius: 5px;
+	}
 }
 
 ul{
